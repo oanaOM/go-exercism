@@ -20,15 +20,15 @@ func IsIsogram(phrase string) bool {
 	runes := map[rune]bool{}
 
 	for _, r := range phrase {
-
+		if !unicode.IsLetter(r) {
+			continue
+		}
 		r = unicode.ToLower(r)
-		if runes[r] && unicode.IsLetter(r) {
+		if runes[r] {
 			return false
 		}
-
 		runes[r] = true
 	}
-
 	return true
 
 }
