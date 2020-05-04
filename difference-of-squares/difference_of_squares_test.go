@@ -1,7 +1,6 @@
 package diffsquares
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -28,10 +27,8 @@ func TestSumOfSquares(t *testing.T) {
 }
 
 func TestDifference(t *testing.T) {
-	fmt.Println(">>")
 	for _, test := range tests {
 		want := test.sqOfSum - test.sumOfSq
-		fmt.Printf(">>>%v", want)
 		if s := Difference(test.n); s != want {
 			t.Fatalf("Difference(%d) = %d, want %d", test.n, s, want)
 		}
