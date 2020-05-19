@@ -15,7 +15,7 @@ func Valid(input string) bool {
 
 	var sum int
 	//initiate a bool that will be used to alternate the element position
-	second := true
+	second := false
 	//remove all spaces
 	input = strings.ReplaceAll(input, " ", "")
 	//we can't validate single values
@@ -25,21 +25,19 @@ func Valid(input string) bool {
 	inputR := []rune(input)
 
 	for i := len(inputR) - 1; i >= 0; i-- {
-		//switch
-		second = !second
 		//convert string to int
 		cn, err := strconv.Atoi(string(inputR[i]))
 		if err != nil {
 			return false
 		}
-
 		if second {
 			cn *= 2
 			if cn > 9 {
 				cn -= 9
 			}
-
 		}
+		//switch position
+		second = !second
 		sum += cn
 	}
 	return sum%10 == 0
