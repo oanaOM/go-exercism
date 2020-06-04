@@ -6,39 +6,35 @@
 package luhn
 
 import (
-	"strconv"
 	"strings"
+	"unicode"
 )
 
-// Valid function checks if a string is valid using the Luhn algorithm
+// Valid function uses Luhn algorithm to check if a string is valid or not
 func Valid(input string) bool {
 
 	var sum int
-	//initiate a bool that will be used to alternate the element position
-	second := false
 	//remove all spaces
 	input = strings.ReplaceAll(input, " ", "")
 	//we can't validate single values
 	if len(input) <= 1 {
 		return false
 	}
-	inputR := []rune(input)
-
-	for i := len(inputR) - 1; i >= 0; i-- {
-		//convert string to int
-		cn, err := strconv.Atoi(string(inputR[i]))
-		if err != nil {
+	//initiate a bool that will be used to alternate the element position
+	second := len(input)%2 == 0
+	for _, r := range input {
+		if !unicode.IsDigit(r) {
 			return false
 		}
+		cn := int(r - '0')
 		if second {
 			cn *= 2
 			if cn > 9 {
 				cn -= 9
 			}
 		}
-		//switch position
-		second = !second
 		sum += cn
+		second = !second
 	}
 	return sum%10 == 0
 }
