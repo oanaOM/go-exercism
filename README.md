@@ -1,4 +1,4 @@
 # Exercises Go Track
 ## Description
 
-Following https://exercism.io/ 
+My solution to exercises following the Go track on https://exercism.io/ 
